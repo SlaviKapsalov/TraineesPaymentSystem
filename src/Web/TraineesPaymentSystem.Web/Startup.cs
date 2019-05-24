@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TraineesPaymentSystem.Data;
 using TraineesPaymentSystem.Data.Models;
+using TraineesPaymentSystem.Data.Seeding;
 using TraineesPaymentSystem.Services.Mapping;
 using TraineesPaymentSystem.Web.Models;
 
@@ -82,7 +83,21 @@ namespace TraineesPaymentSystem.Web
         {
             AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
 
-            // Data seeding
+            // Seed data on application startup
+            using (var serviceScope = app.ApplicationServices.CreateScope())
+            {
+                var dbContext = serviceScope.ServiceProvider
+                    .GetRequiredService<TraineesPaymentSystemDbContext>();
+
+                if (env.IsDevelopment())
+                {
+                    dbContext.Database.Migrate();
+                }
+
+                new TraineesPaymentSystemDbContextSeeder()
+                    .SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
+            }
+
 
             if (env.IsDevelopment())
             {

@@ -16,7 +16,11 @@
         {
         }
 
+        public virtual DbSet<Trainee> Trainees { get; set; }
 
+        public virtual DbSet<TraineeTask> Tasks { get; set; }
+
+        public virtual DbSet<TaskType> TaskTypes { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 
@@ -89,7 +93,7 @@
 
             foreach (var entry in changedEntries)
             {
-                var entity = (IAuditInfo) entry.Entity;
+                var entity = (IAuditInfo)entry.Entity;
                 if (entry.State == EntityState.Added && entity.CreatedOn == default)
                 {
                     entity.CreatedOn = DateTime.UtcNow;
