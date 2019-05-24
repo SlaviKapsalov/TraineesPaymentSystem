@@ -25,7 +25,7 @@
 
             var seeders = new List<ISeeder>
             {
-
+                new TaskTypesSeeder()
             };
 
             foreach (var seeder in seeders)

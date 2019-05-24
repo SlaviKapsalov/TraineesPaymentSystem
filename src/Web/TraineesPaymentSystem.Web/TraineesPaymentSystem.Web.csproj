@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <UserSecretsId>aspnet-TraineesPaymentSystem.Web-35A5301F-72C9-4788-8DF1-4F0A60E9A58A</UserSecretsId>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
 
@@ -17,6 +18,8 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\TraineesPaymentSystem.Data\TraineesPaymentSystem.Data.csproj" />
     <ProjectReference Include="..\..\Services\TraineesPaymentSystem.Services.Mapping\TraineesPaymentSystem.Services.Mapping.csproj" />
+    <ProjectReference Include="..\..\Services\TraineesPaymentSystem.Services\TraineesPaymentSystem.Services.csproj" />
+    <ProjectReference Include="..\..\TraineesPaymentSystem.Common\TraineesPaymentSystem.Common.csproj" />
     <ProjectReference Include="..\TraineesPaymentSystem.Web.Models\TraineesPaymentSystem.Web.Models.csproj" />
   </ItemGroup>
 

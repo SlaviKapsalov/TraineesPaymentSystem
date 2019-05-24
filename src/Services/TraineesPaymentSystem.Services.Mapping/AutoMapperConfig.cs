@@ -19,7 +19,7 @@
 
             initialized = true;
 
-            var types = assemblies.SelectMany(a => a.GetExportedTypes().ToList());
+            var types = assemblies.SelectMany(a => a.GetExportedTypes()).ToList();
 
             Mapper.Initialize(configuration =>
             {
@@ -54,7 +54,7 @@
                            select new TypesMap
                            {
                                Source = i.GetTypeInfo().GetGenericArguments()[0],
-                               Destination = t
+                               Destination = t,
                            };
 
             return fromMaps;
@@ -71,7 +71,7 @@
                          select new TypesMap
                          {
                              Source = t,
-                             Destination = t.GetTypeInfo().GetGenericArguments()[0]
+                             Destination = i.GetTypeInfo().GetGenericArguments()[0],
                          };
 
             return toMaps;

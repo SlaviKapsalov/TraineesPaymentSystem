@@ -1,8 +1,11 @@
-﻿namespace TraineesPaymentSystem.Web.Controllers
+﻿using Microsoft.AspNetCore.Authorization;
+
+namespace TraineesPaymentSystem.Web.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
 
-    public class BaseController : Controller
+    [Authorize]
+    public abstract class BaseController : Controller
     {
     }
 }
