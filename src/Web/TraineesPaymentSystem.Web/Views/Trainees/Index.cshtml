@@ -9,12 +9,11 @@
 
 <h1>Trainees</h1>
 
-@*<p>
-    <a asp-action="Create">Create New</a>
-    <a href="@(Url.Action("ExportIndex") + ViewContext.HttpContext.Request.QueryString)">Export</a>
-</p>*@
-
-<a asp-action="Index">Clear Filters</a>
+<p>
+    <a asp-action="Create">Create New</a> |
+    <a asp-action="Index">Clear Filters</a>
+    @*<a href="@(Url.Action("ExportIndex") + ViewContext.HttpContext.Request.QueryString)">Export</a>*@
+</p>
 
 @(grid
       .WithFilterMode(GridFilterMode.FilterRow))

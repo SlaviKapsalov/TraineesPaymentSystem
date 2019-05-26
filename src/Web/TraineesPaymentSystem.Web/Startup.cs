@@ -85,6 +85,7 @@ namespace TraineesPaymentSystem.Web
             // Application services
             services.AddScoped<ITraineeService, TraineeService>();
             services.AddScoped<ITaskService, TaskService>();
+            services.AddScoped<ITaskTypeService, TaskTypeService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

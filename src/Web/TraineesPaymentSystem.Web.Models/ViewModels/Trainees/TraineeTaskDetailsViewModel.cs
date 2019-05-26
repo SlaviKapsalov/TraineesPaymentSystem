@@ -1,11 +1,13 @@
-﻿using System;
-using TraineesPaymentSystem.Data.Models;
-using TraineesPaymentSystem.Services.Mapping;
-
-namespace TraineesPaymentSystem.Web.Models.ViewModels.Trainees
+﻿namespace TraineesPaymentSystem.Web.Models.ViewModels.Trainees
 {
+    using Services.Mapping;
+    using System;
+    using TraineesPaymentSystem.Data.Models;
+
     public class TraineeTaskDetailsViewModel : IMapFrom<TraineeTask>
     {
+        public int Id { get; set; }
+
         public string Name { get; set; }
 
         public int Hours { get; set; }

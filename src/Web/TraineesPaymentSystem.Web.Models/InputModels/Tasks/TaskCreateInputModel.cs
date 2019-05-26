@@ -1,4 +1,6 @@
-﻿namespace TraineesPaymentSystem.Web.Models.InputModels.Tasks
+﻿using Microsoft.AspNetCore.Mvc;
+
+namespace TraineesPaymentSystem.Web.Models.InputModels.Tasks
 {
     using Services.Mapping;
     using System;
@@ -16,12 +18,14 @@
         public string Comment { get; set; }
 
         [Required]
+        [DataType(DataType.Date)]
         public DateTime FinishedOn { get; set; }
 
         [Required]
         public string AssignedFrom { get; set; }
 
         [Required]
+        [HiddenInput]
         public int TraineeId { get; set; }
 
         [Required]

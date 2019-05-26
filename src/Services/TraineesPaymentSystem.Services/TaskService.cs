@@ -1,4 +1,6 @@
-﻿namespace TraineesPaymentSystem.Services
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace TraineesPaymentSystem.Services
 {
     using Contracts;
     using Data.Common.Repository;
@@ -26,6 +28,17 @@
 
             // ReSharper disable once PossibleNullReferenceException
             return task.Id;
+        }
+
+        public async Task<TModel> Details<TModel>(int id)
+        {
+            var task = await this.taskRepository
+                .AllAsNoTracking()
+                .Where(t => t.Id == id)
+                .To<TModel>()
+                .SingleOrDefaultAsync();
+
+            return task;
         }
     }
 }
