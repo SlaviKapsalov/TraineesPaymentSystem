@@ -17,5 +17,11 @@ namespace TraineesPaymentSystem.Data.Seeding.Constants
             { "Questor", 6},
             { "Co-lecturer", 10}
         };
+
+        public const string RoleUser = "User";
+
+        public const string RoleModerator = "Moderator";
+
+        public const string RoleAdministration = "Administrator";
     }
 }

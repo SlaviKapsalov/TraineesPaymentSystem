@@ -25,7 +25,8 @@
 
             var seeders = new List<ISeeder>
             {
-                new TaskTypesSeeder()
+                new TaskTypesSeeder(),
+                new RolesSeeder()
             };
 
             foreach (var seeder in seeders)
