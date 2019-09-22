@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using TraineesPaymentSystem.Web.Models;
+using TraineesPaymentSystem.Web.Models.ViewModels;
 
 namespace TraineesPaymentSystem.Web.Controllers
 {

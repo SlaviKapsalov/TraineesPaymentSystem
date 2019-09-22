@@ -9,9 +9,15 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TraineesPaymentSystem.Data;
+using TraineesPaymentSystem.Data.Common.Repository;
 using TraineesPaymentSystem.Data.Models;
+using TraineesPaymentSystem.Data.Repository;
+using TraineesPaymentSystem.Data.Seeding;
+using TraineesPaymentSystem.Services;
+using TraineesPaymentSystem.Services.Contracts;
 using TraineesPaymentSystem.Services.Mapping;
 using TraineesPaymentSystem.Web.Models;
+using TraineesPaymentSystem.Web.Models.ViewModels;
 
 namespace TraineesPaymentSystem.Web
 {
@@ -69,12 +75,17 @@ namespace TraineesPaymentSystem.Web
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.Lax;
                 options.ConsentCookie.Name = ".AspNetCore.ConsentCookie";
-
-                services.AddSingleton(this.configuration);
-
-                // Application services
-                //services.AddTransient<>()
             });
+
+            services.AddSingleton(this.configuration);
+
+            // Data repositories
+            services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
+
+            // Application services
+            services.AddScoped<ITraineeService, TraineeService>();
+            services.AddScoped<ITaskService, TaskService>();
+            services.AddScoped<ITaskTypeService, TaskTypeService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -82,7 +93,21 @@ namespace TraineesPaymentSystem.Web
         {
             AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
 
-            // Data seeding
+            // Seed data on application startup
+            using (var serviceScope = app.ApplicationServices.CreateScope())
+            {
+                var dbContext = serviceScope.ServiceProvider
+                    .GetRequiredService<TraineesPaymentSystemDbContext>();
+
+                if (env.IsDevelopment())
+                {
+                    dbContext.Database.Migrate();
+                }
+
+                new TraineesPaymentSystemDbContextSeeder()
+                    .SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
+            }
+
 
             if (env.IsDevelopment())
             {
@@ -103,10 +128,8 @@ namespace TraineesPaymentSystem.Web
 
             app.UseMvc(routes =>
             {
-                routes.MapRoute(
-                    name: "default", "{controller=Home}/{action=Index}/{id?}");
-                routes.MapRoute(
-                    name: "areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                routes.MapRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

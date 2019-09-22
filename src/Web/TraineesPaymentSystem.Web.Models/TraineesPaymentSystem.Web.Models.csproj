@@ -1,7 +1,17 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.DataAnnotations" Version="2.2.0" />
+    <PackageReference Include="NonFactors.Grid.Core.Mvc6" Version="4.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Data\TraineesPaymentSystem.Data.Models\TraineesPaymentSystem.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Services\TraineesPaymentSystem.Services.Mapping\TraineesPaymentSystem.Services.Mapping.csproj" />
+    <ProjectReference Include="..\..\TraineesPaymentSystem.Common\TraineesPaymentSystem.Common.csproj" />
+  </ItemGroup>
 </Project>

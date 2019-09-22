@@ -1,0 +1,38 @@
+﻿@using TraineesPaymentSystem.Web.Models.ViewModels.Trainees
+@model IGrid<TraineesPaymentSystem.Web.Models.ViewModels.Trainees.TraineeIndexViewModel>
+
+@{
+    ViewData["Title"] = "Trainees";
+
+    var grid = new HtmlGrid<TraineeIndexViewModel>(Html, Model);
+}
+
+<h1>Trainees</h1>
+
+<p>
+    <a asp-action="Create">Create New</a> |
+    <a asp-action="Index">Clear Filters</a>
+    @*<a href="@(Url.Action("ExportIndex") + ViewContext.HttpContext.Request.QueryString)">Export</a>*@
+</p>
+
+@(grid
+      .WithFilterMode(GridFilterMode.FilterRow))
+
+@*@(Html
+          .Grid(Model)
+          .Build(columns =>
+          {
+              columns.Add(model => model.Name).Titled("Name").Css("bolded");
+              columns.Add(model => model.Username).Titled("Username");
+              columns.Add(model => model.Age).Titled("Age");
+              columns.Add(model => model.Age).Titled("Age");
+
+              columns.Add(model => model.CountTasks).Titled("Count Tasks");
+          })
+          .WithFilterMode(GridFilterMode.FilterRow)
+          .Empty("No data found")
+          .Filterable()
+          .Sortable()
+          .Pageable()
+          .AppendCss("table-hover")
+    )*@
